@@ -1,0 +1,34 @@
+
+
+SPASS, backward subsumption of C on N
+where C (query) clause and N index of clauses.
+
+def.:
+ return the list { D in N such that C subsumes D }
+
+choose an atom A of C of maximal weight
+
+ for each atom A' of N  (1)
+ such that exists sigma, A' = A sigma
+
+  for each clause D in N containing A'  (2)
+   
+   if C subsumes D then add D to the returned list
+
+(1) lazy stream enumeration,
+    with 'initialize' and 'next' functions of the module 'index'
+(2) 'for' loop,
+     on list returned by the module 'index'
+
+Rem1. 
+A' = Asigma in D is a necessary condition for C subsumes D.
+the choice  of A maximal reduces drastically the number of candidates D.   
+
+
+Rem2.
+In the test C subsumes D,
+it is not necessary to consider the literal A'
+-> special (accelerated) subsumption test with input 
+  C, D, A, A', sigma
+
+

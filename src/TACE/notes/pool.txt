@@ -1,0 +1,18 @@
+
+Pool of clauses (not yet treated) 
+= set called US in SPASS,
+for selection of new candidate for resolution
+(with worked clauses, called WO in SPASS).
+
+Not tested for subsumption.
+
+Store only:
+- indices of the 2 clauses used to produce
+this clause (by resolution)
+- a code of the operation producing the clause
+(resolution, resolution + e-splitting etc & simplification?)
+- the size of the clause
+  (for choosing the candidate of minimum size).
+
+
+

@@ -1,0 +1,20 @@
+
+# Example pour la subsumption
+
+# Equational theory (collapsing)
+=> f(g(x),g(x)) = x.
+
+# TA transitions
+#=> Q0(a).
+#=> Q0(b).
+Q1(x1), Q0(x2) => Q1(f(x1,x2)).
+Q0(x1), Q0(x2) => Q1(f(x1,x2)).
+
+# right-paramodulation returns
+# Q1(g(x)), Q0(g(x)) => Q1(x).
+# Q0(g(x)) => Q1(x).
+
+
+# Negation of the conjecture: (list of clauses)
+Q1(a) =>.
+

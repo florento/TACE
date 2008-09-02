@@ -1,0 +1,8 @@
+# Tree automata aa3
+
+=> Q(a).
+
+# query
+# = emptyness decision
+Q(x) => .
+

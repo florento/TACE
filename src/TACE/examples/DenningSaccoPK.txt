@@ -1,0 +1,56 @@
+
+# DenningSaccoPK.txt
+# Derivation of attack on DS PK protocol.
+# Model with explicit destructors and tree automata with constraints modulo.
+#
+# system = 1 process 
+# process 1 with role B (responder), name = b
+# active attacker
+#
+# index of states: Q_i: 
+# i = pc of process 1 (of role B).
+
+
+# Equational theory (collapsing)
+ => sd(se(z1,z2),z2) = z1.
+ => ad(ae(z1,z2),inv(z2)) = z1.
+ => ad(ae(z1,inv(z2)),z2) = z1.
+ => inv(inv(z)) = z .
+ => fst(pair(z1,z2)) = z1.
+ => snd(pair(z1,z2)) = z2.
+
+
+# Intruder's initial knowledge populate start state
+ => Q0(a).
+ => Q0(b).
+
+
+# Visible symbols
+ Q0(x1),Q0(x2) => Q0(se(x1,x2)).
+ Q0(x1),Q1(x2) => Q1(se(x1,x2)).
+ Q1(x1),Q0(x2) => Q1(se(x1,x2)).
+ Q0(x1),Q0(x2) => Q0(sd(x1,x2)).
+ Q0(x1),Q1(x2) => Q1(sd(x1,x2)).
+ Q1(x1),Q0(x2) => Q1(sd(x1,x2)).
+ Q0(x1),Q0(x2) => Q0(ae(x1,x2)).
+ Q0(x1),Q1(x2) => Q1(ae(x1,x2)).
+ Q1(x1),Q0(x2) => Q1(ae(x1,x2)).
+ Q0(x1),Q0(x2) => Q0(ad(x1,x2)).
+ Q0(x1),Q1(x2) => Q1(ad(x1,x2)).
+ Q1(x1),Q0(x2) => Q1(ad(x1,x2)).
+ Q0(x1),Q0(x2) => Q0(pair(x1,x2)).
+ Q0(x1),Q1(x2) => Q1(pair(x1,x2)).
+ Q1(x1),Q0(x2) => Q1(pair(x1,x2)).
+ Q0(x) => Q0(pub(x)).
+ Q1(x) => Q1(pub(x)).
+ Q0(x) => Q0(fst(x)).
+ Q1(x) => Q1(fst(x)).
+ Q0(x) => Q0(snd(x)).
+ Q1(x) => Q1(snd(x)).
+
+# B's process (1 transition)
+Q0(y), y2 = se(s,ad(ad(snd(y),inv(pub(b))), pub(fst(y)))) => Q1(y2).
+
+# Negation of the conjecture: (list of clauses)
+Q1(s) => .
+

@@ -1,0 +1,15 @@
+
+# TA transitions
+
+=> Q0(a).
+=> Q0(b).
+
+# transitions: les etats du mb gauche <= etat mb droit
+
+Q0(x) => Q1(g(x)).
+Q1(x) => Q1(g(x)).
+Q1(x) => Q1(h(x)).
+
+# Negation of the conjecture: (list of clauses)
+
+Q1(x), Q0(x) => .

@@ -1,0 +1,16 @@
+
+Types of clauses.
+Both sets of clauses WO and US
+are partitionned acc. to the following categories.
+
+- STDO = (t\leq)
+- CSTE = (d) avec equalities
+- CSTD = (d+) without equalities
+  obtained from (d) by eq. elim.
+- GOAL
+- UNIT (without splitting literals) [opt]
+- SPLIT- with neg. splitting literal
+- SPLIT+ with pos. splitting literal
+
+
+

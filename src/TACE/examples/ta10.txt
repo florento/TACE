@@ -1,0 +1,19 @@
+
+# Equational theory (collapsing)
+
+
+# Intruder's initial knowledge populate start state
+=> Q0(a)
+
+# Visible symbols
+
+
+# process (1 transition)
+#Q0(y) => Q1(y,y)
+Q0(y) => Q1(f(y))
+
+# Negation of the conjecture: (list of clauses)
+#Q1(a,a) =>
+Q1(f(a)) =>
+
+

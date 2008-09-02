@@ -1,0 +1,29 @@
+
+SPASS, forward subsumption of C by N
+where C (query) clause and N index of clauses.
+
+def.:
+ exists D in N such that D subsumes C?
+
+for each atom A of C    (1)
+
+ for each atom A' of N  (2)
+ such that exists sigma, A = A'sigma
+
+  for each clause D in N containing A'  (3)
+   
+   if D subsumes C then exit with 'yes'
+
+(1) 'for' loop on the list of atoms
+(2) lazy stream enumeration,
+    with 'initialize' and 'next' functions of the module 'index'
+(3) 'for' loop,
+     on list returned by the module 'index'
+
+
+Rem.: possibility to group loops (2) and (3)
+into a lazy stream enumeration
+(with a special 'initialize' function of nodule 'index').
+    
+
+

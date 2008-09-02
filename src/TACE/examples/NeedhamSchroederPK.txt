@@ -1,0 +1,423 @@
+# NeedhamScroederPK.dat: data file for daTac
+
+# Derivation of Lowe's attack on NS PK protocol.
+# Model with explicit destructors and tree automata with constraints modulo
+#
+# system = 2 process (= attaque de Lowe):
+#  process 1 with role A (initiator), name = a, interlocuteur = i, 
+#  process 2 with role B (responder), name = b
+#
+# index of states: Q_ia_ib_ab: 
+# ia = pc of process 1 (of role A).
+# ib = pc of process 2 (of role B).
+# ab = flag set to 1 if the name of initiator in the first message
+# received by process 2 is equal to 'a' 
+# and set to 0 if no message was yet received by process 2 
+# or if the name of initiator in the first message
+# received by process 2 is not equal to a.
+
+
+#1
+# AC operators: (list of op1, op2, ...)
+
+#2
+# C operators: (list of op1, op2, ...)
+
+#3
+# Minimal operator:
+ok
+
+#4
+# Precedence ordering on operators:
+ad > ae > pair > fst > snd > pub > inv > a > b > i > na > nb > trigger > ok
+Q000 = Q010 = Q011 = Q020 = Q021 = Q100 = Q110 = Q111 = Q120 = Q121 = Q200 = Q201 = Q210 = Q211 = Q220 = Q221
+
+#5
+# Status of operators:
+# ex:    f, g : lexico_left_right
+#        h : lexico_right_left
+#        i : multiset
+# default: lexico_left_right
+
+#6
+# Strategy for applying inferences:
+# operators:  ",": or
+#             ";": and
+#             "+": then
+#             "(...)n": iteration (n can be *)
+# Example: ref,(rcp;ep;(rp)*),(ep+rp)5
+# Default: rp,lp,crp,clp,ep,ref,ef,res,f
+rp,lp,crp,clp,ep,ref,ef,res,f
+
+#70
+# Theory already treated: (list of clauses)
+
+#7
+# Theory: (list of clauses)
+
+# Equational theory (collapsing)
+=> ad(ae(Z1,Z2),inv(Z2)) = Z1
+=> ad(ae(Z1,inv(Z2)),Z2) = Z1
+=> inv(inv(Z)) = Z
+=> fst(pair(Z1,Z2)) = Z1
+=> snd(pair(Z1,Z2)) = Z2
+
+# Intruder's initial knowledge to populate start state
+=> Q000(a)
+=> Q000(b)
+=> Q000(i)
+=> Q000(inv(pub(i)))
+=> Q000(trigger)
+
+# Application of public symbols
+Q000(X1),Q000(X2) => Q000(ae(X1,X2))
+Q010(X1),Q000(X2) => Q010(ae(X1,X2))
+Q011(X1),Q000(X2) => Q011(ae(X1,X2))
+Q020(X1),Q000(X2) => Q020(ae(X1,X2))
+Q021(X1),Q000(X2) => Q021(ae(X1,X2))
+Q100(X1),Q000(X2) => Q100(ae(X1,X2))
+Q110(X1),Q000(X2) => Q110(ae(X1,X2))
+Q111(X1),Q000(X2) => Q111(ae(X1,X2))
+Q120(X1),Q000(X2) => Q120(ae(X1,X2))
+Q121(X1),Q000(X2) => Q121(ae(X1,X2))
+Q200(X1),Q000(X2) => Q200(ae(X1,X2))
+Q210(X1),Q000(X2) => Q210(ae(X1,X2))
+Q211(X1),Q000(X2) => Q211(ae(X1,X2))
+Q220(X1),Q000(X2) => Q220(ae(X1,X2))
+Q221(X1),Q000(X2) => Q221(ae(X1,X2))
+Q000(X1),Q010(X2) => Q010(ae(X1,X2))
+Q000(X1),Q011(X2) => Q011(ae(X1,X2))
+Q100(X1),Q010(X2) => Q110(ae(X1,X2))
+Q100(X1),Q011(X2) => Q111(ae(X1,X2))
+Q200(X1),Q010(X2) => Q210(ae(X1,X2))
+Q200(X1),Q011(X2) => Q211(ae(X1,X2))
+Q000(X1),Q020(X2) => Q020(ae(X1,X2))
+Q000(X1),Q021(X2) => Q021(ae(X1,X2))
+Q100(X1),Q020(X2) => Q120(ae(X1,X2))
+Q100(X1),Q021(X2) => Q121(ae(X1,X2))
+Q200(X1),Q020(X2) => Q220(ae(X1,X2))
+Q200(X1),Q021(X2) => Q221(ae(X1,X2))
+Q000(X1),Q100(X2) => Q100(ae(X1,X2))
+Q010(X1),Q100(X2) => Q110(ae(X1,X2))
+Q011(X1),Q100(X2) => Q111(ae(X1,X2))
+Q020(X1),Q100(X2) => Q120(ae(X1,X2))
+Q021(X1),Q100(X2) => Q121(ae(X1,X2))
+Q000(X1),Q110(X2) => Q110(ae(X1,X2))
+Q000(X1),Q111(X2) => Q111(ae(X1,X2))
+Q000(X1),Q120(X2) => Q120(ae(X1,X2))
+Q000(X1),Q121(X2) => Q121(ae(X1,X2))
+Q000(X1),Q200(X2) => Q200(ae(X1,X2))
+Q010(X1),Q200(X2) => Q210(ae(X1,X2))
+Q011(X1),Q200(X2) => Q211(ae(X1,X2))
+Q020(X1),Q200(X2) => Q220(ae(X1,X2))
+Q021(X1),Q200(X2) => Q221(ae(X1,X2))
+Q000(X1),Q210(X2) => Q210(ae(X1,X2))
+Q000(X1),Q211(X2) => Q211(ae(X1,X2))
+Q000(X1),Q220(X2) => Q220(ae(X1,X2))
+Q000(X1),Q221(X2) => Q221(ae(X1,X2))
+
+Q000(X1),Q000(X2) => Q000(ad(X1,X2))
+Q010(X1),Q000(X2) => Q010(ad(X1,X2))
+Q011(X1),Q000(X2) => Q011(ad(X1,X2))
+Q020(X1),Q000(X2) => Q020(ad(X1,X2))
+Q021(X1),Q000(X2) => Q021(ad(X1,X2))
+Q100(X1),Q000(X2) => Q100(ad(X1,X2))
+Q110(X1),Q000(X2) => Q110(ad(X1,X2))
+Q111(X1),Q000(X2) => Q111(ad(X1,X2))
+Q120(X1),Q000(X2) => Q120(ad(X1,X2))
+Q121(X1),Q000(X2) => Q121(ad(X1,X2))
+Q200(X1),Q000(X2) => Q200(ad(X1,X2))
+Q210(X1),Q000(X2) => Q210(ad(X1,X2))
+Q211(X1),Q000(X2) => Q211(ad(X1,X2))
+Q220(X1),Q000(X2) => Q220(ad(X1,X2))
+Q221(X1),Q000(X2) => Q221(ad(X1,X2))
+Q000(X1),Q010(X2) => Q010(ad(X1,X2))
+Q000(X1),Q011(X2) => Q011(ad(X1,X2))
+Q100(X1),Q010(X2) => Q110(ad(X1,X2))
+Q100(X1),Q011(X2) => Q111(ad(X1,X2))
+Q200(X1),Q010(X2) => Q210(ad(X1,X2))
+Q200(X1),Q011(X2) => Q211(ad(X1,X2))
+Q000(X1),Q020(X2) => Q020(ad(X1,X2))
+Q000(X1),Q021(X2) => Q021(ad(X1,X2))
+Q100(X1),Q020(X2) => Q120(ad(X1,X2))
+Q100(X1),Q021(X2) => Q121(ad(X1,X2))
+Q200(X1),Q020(X2) => Q220(ad(X1,X2))
+Q200(X1),Q021(X2) => Q221(ad(X1,X2))
+Q000(X1),Q100(X2) => Q100(ad(X1,X2))
+Q010(X1),Q100(X2) => Q110(ad(X1,X2))
+Q011(X1),Q100(X2) => Q111(ad(X1,X2))
+Q020(X1),Q100(X2) => Q120(ad(X1,X2))
+Q021(X1),Q100(X2) => Q121(ad(X1,X2))
+Q000(X1),Q110(X2) => Q110(ad(X1,X2))
+Q000(X1),Q111(X2) => Q111(ad(X1,X2))
+Q000(X1),Q120(X2) => Q120(ad(X1,X2))
+Q000(X1),Q121(X2) => Q121(ad(X1,X2))
+Q000(X1),Q200(X2) => Q200(ad(X1,X2))
+Q010(X1),Q200(X2) => Q210(ad(X1,X2))
+Q011(X1),Q200(X2) => Q211(ad(X1,X2))
+Q020(X1),Q200(X2) => Q220(ad(X1,X2))
+Q021(X1),Q200(X2) => Q221(ad(X1,X2))
+Q000(X1),Q210(X2) => Q210(ad(X1,X2))
+Q000(X1),Q211(X2) => Q211(ad(X1,X2))
+Q000(X1),Q220(X2) => Q220(ad(X1,X2))
+Q000(X1),Q221(X2) => Q221(ad(X1,X2))
+
+Q000(X1),Q000(X2) => Q000(pair(X1,X2))
+Q010(X1),Q000(X2) => Q010(pair(X1,X2))
+Q011(X1),Q000(X2) => Q011(pair(X1,X2))
+Q020(X1),Q000(X2) => Q020(pair(X1,X2))
+Q021(X1),Q000(X2) => Q021(pair(X1,X2))
+Q100(X1),Q000(X2) => Q100(pair(X1,X2))
+Q110(X1),Q000(X2) => Q110(pair(X1,X2))
+Q111(X1),Q000(X2) => Q111(pair(X1,X2))
+Q120(X1),Q000(X2) => Q120(pair(X1,X2))
+Q121(X1),Q000(X2) => Q121(pair(X1,X2))
+Q200(X1),Q000(X2) => Q200(pair(X1,X2))
+Q210(X1),Q000(X2) => Q210(pair(X1,X2))
+Q211(X1),Q000(X2) => Q211(pair(X1,X2))
+Q220(X1),Q000(X2) => Q220(pair(X1,X2))
+Q221(X1),Q000(X2) => Q221(pair(X1,X2))
+Q000(X1),Q010(X2) => Q010(pair(X1,X2))
+Q000(X1),Q011(X2) => Q011(pair(X1,X2))
+Q100(X1),Q010(X2) => Q110(pair(X1,X2))
+Q100(X1),Q011(X2) => Q111(pair(X1,X2))
+Q200(X1),Q010(X2) => Q210(pair(X1,X2))
+Q200(X1),Q011(X2) => Q211(pair(X1,X2))
+Q000(X1),Q020(X2) => Q020(pair(X1,X2))
+Q000(X1),Q021(X2) => Q021(pair(X1,X2))
+Q100(X1),Q020(X2) => Q120(pair(X1,X2))
+Q100(X1),Q021(X2) => Q121(pair(X1,X2))
+Q200(X1),Q020(X2) => Q220(pair(X1,X2))
+Q200(X1),Q021(X2) => Q221(pair(X1,X2))
+Q000(X1),Q100(X2) => Q100(pair(X1,X2))
+Q010(X1),Q100(X2) => Q110(pair(X1,X2))
+Q011(X1),Q100(X2) => Q111(pair(X1,X2))
+Q020(X1),Q100(X2) => Q120(pair(X1,X2))
+Q021(X1),Q100(X2) => Q121(pair(X1,X2))
+Q000(X1),Q110(X2) => Q110(pair(X1,X2))
+Q000(X1),Q111(X2) => Q111(pair(X1,X2))
+Q000(X1),Q120(X2) => Q120(pair(X1,X2))
+Q000(X1),Q121(X2) => Q121(pair(X1,X2))
+Q000(X1),Q200(X2) => Q200(pair(X1,X2))
+Q010(X1),Q200(X2) => Q210(pair(X1,X2))
+Q011(X1),Q200(X2) => Q211(pair(X1,X2))
+Q020(X1),Q200(X2) => Q220(pair(X1,X2))
+Q021(X1),Q200(X2) => Q221(pair(X1,X2))
+Q000(X1),Q210(X2) => Q210(pair(X1,X2))
+Q000(X1),Q211(X2) => Q211(pair(X1,X2))
+Q000(X1),Q220(X2) => Q220(pair(X1,X2))
+Q000(X1),Q221(X2) => Q221(pair(X1,X2))
+
+Q000(X) => Q000(pub(X))
+Q010(X) => Q010(pub(X))
+Q011(X) => Q011(pub(X))
+Q020(X) => Q020(pub(X))
+Q021(X) => Q021(pub(X))
+Q100(X) => Q100(pub(X))
+Q110(X) => Q110(pub(X))
+Q111(X) => Q111(pub(X))
+Q120(X) => Q120(pub(X))
+Q121(X) => Q121(pub(X))
+Q200(X) => Q200(pub(X))
+Q210(X) => Q210(pub(X))
+Q211(X) => Q211(pub(X))
+Q220(X) => Q220(pub(X))
+Q221(X) => Q221(pub(X))
+
+Q000(X) => Q000(fst(X))
+Q010(X) => Q010(fst(X))
+Q011(X) => Q011(fst(X))
+Q020(X) => Q020(fst(X))
+Q021(X) => Q021(fst(X))
+Q100(X) => Q100(fst(X))
+Q110(X) => Q110(fst(X))
+Q111(X) => Q111(fst(X))
+Q120(X) => Q120(fst(X))
+Q121(X) => Q121(fst(X))
+Q200(X) => Q200(fst(X))
+Q210(X) => Q210(fst(X))
+Q211(X) => Q211(fst(X))
+Q220(X) => Q220(fst(X))
+Q221(X) => Q221(fst(X))
+
+Q000(X) => Q000(snd(X))
+Q010(X) => Q010(snd(X))
+Q011(X) => Q011(snd(X))
+Q020(X) => Q020(snd(X))
+Q021(X) => Q021(snd(X))
+Q100(X) => Q100(snd(X))
+Q110(X) => Q110(snd(X))
+Q111(X) => Q111(snd(X))
+Q120(X) => Q120(snd(X))
+Q121(X) => Q121(snd(X))
+Q200(X) => Q200(snd(X))
+Q210(X) => Q210(snd(X))
+Q211(X) => Q211(snd(X))
+Q220(X) => Q220(snd(X))
+Q221(X) => Q221(snd(X))
+
+
+# 1st A's process 
+
+# message 1 
+# the name of the responder i is in the initial memory of the process
+# this memory is not represented in clauses.
+
+Q000(Y), Y = trigger => Q100(ae(pair(na,a),pub(i)))
+Q010(Y), Y = trigger => Q110(ae(pair(na,a),pub(i)))
+Q011(Y), Y = trigger => Q111(ae(pair(na,a),pub(i)))
+Q020(Y), Y = trigger => Q120(ae(pair(na,a),pub(i)))
+Q021(Y), Y = trigger => Q121(ae(pair(na,a),pub(i)))
+
+
+# message 3 
+# test for presence of na in message 2
+
+Q100(Y), fst(ad(Y,inv(pub(a)))) = na => Q200(ae(snd(ad(Y,inv(pub(a)))),pub(i)))
+Q110(Y), fst(ad(Y,inv(pub(a)))) = na => Q210(ae(snd(ad(Y,inv(pub(a)))),pub(i)))
+Q111(Y), fst(ad(Y,inv(pub(a)))) = na => Q211(ae(snd(ad(Y,inv(pub(a)))),pub(i)))
+Q120(Y), fst(ad(Y,inv(pub(a)))) = na => Q220(ae(snd(ad(Y,inv(pub(a)))),pub(i)))
+Q121(Y), fst(ad(Y,inv(pub(a)))) = na => Q221(ae(snd(ad(Y,inv(pub(a)))),pub(i)))
+
+
+# 1st B's process
+
+# message 2
+# the initiator's name is extracted - by decryption and projection right - from the first message.
+# the third index (flag) of state is set accordingly.
+# NB: explosion for nequal a
+
+Q000(Y), snd(ad(Y,inv(pub(b)))) = a => Q011(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q000(Y), snd(ad(Y,inv(pub(b)))) = b =>  Q010(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q000(Y), snd(ad(Y,inv(pub(b)))) = i => Q010(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q000(Y), snd(ad(Y,inv(pub(b)))) = pair(Z1,Z2) => Q010(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q000(Y), snd(ad(Y,inv(pub(b)))) = fst(Z) => Q010(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q000(Y), snd(ad(Y,inv(pub(b)))) = snd(Z) => Q010(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q000(Y), snd(ad(Y,inv(pub(b)))) = ae(Z1,Z2) => Q010(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q000(Y), snd(ad(Y,inv(pub(b)))) = ad(Z1,Z2) => Q010(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q000(Y), snd(ad(Y,inv(pub(b)))) = pub(Z) => Q010(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q000(Y), snd(ad(Y,inv(pub(b)))) = inv(Z) => Q010(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q000(Y), snd(ad(Y,inv(pub(b)))) = na => Q010(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q000(Y), snd(ad(Y,inv(pub(b)))) = nb => Q010(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q000(Y), snd(ad(Y,inv(pub(b)))) = trigger => Q010(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q000(Y), snd(ad(Y,inv(pub(b)))) = ok => Q010(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+
+Q100(Y), snd(ad(Y,inv(pub(b)))) = a => Q111(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q100(Y), snd(ad(Y,inv(pub(b)))) = b => Q110(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q100(Y), snd(ad(Y,inv(pub(b)))) = i => Q110(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q100(Y), snd(ad(Y,inv(pub(b)))) = pair(Z1,Z2) => Q110(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q100(Y), snd(ad(Y,inv(pub(b)))) = fst(Z) => Q110(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q100(Y), snd(ad(Y,inv(pub(b)))) = snd(Z) => Q110(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q100(Y), snd(ad(Y,inv(pub(b)))) = ae(Z1,Z2) => Q110(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q100(Y), snd(ad(Y,inv(pub(b)))) = ad(Z1,Z2) => Q110(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q100(Y), snd(ad(Y,inv(pub(b)))) = pub(Z) => Q110(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q100(Y), snd(ad(Y,inv(pub(b)))) = inv(Z) => Q110(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q100(Y), snd(ad(Y,inv(pub(b)))) = na => Q110(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q100(Y), snd(ad(Y,inv(pub(b)))) = nb => Q110(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q100(Y), snd(ad(Y,inv(pub(b)))) = trigger => Q110(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q100(Y), snd(ad(Y,inv(pub(b)))) = ok => Q110(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+
+Q200(Y), snd(ad(Y,inv(pub(b)))) = a => Q211(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q200(Y), snd(ad(Y,inv(pub(b)))) = b => Q210(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q200(Y), snd(ad(Y,inv(pub(b)))) = i => Q210(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q200(Y), snd(ad(Y,inv(pub(b)))) = pair(Z1,Z2) => Q210(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q200(Y), snd(ad(Y,inv(pub(b)))) = fst(Z) => Q210(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q200(Y), snd(ad(Y,inv(pub(b)))) = snd(Z) => Q210(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q200(Y), snd(ad(Y,inv(pub(b)))) = ae(Z1,Z2) => Q210(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q200(Y), snd(ad(Y,inv(pub(b)))) = ad(Z1,Z2) => Q210(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q200(Y), snd(ad(Y,inv(pub(b)))) = pub(Z) => Q210(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q200(Y), snd(ad(Y,inv(pub(b)))) = inv(Z) => Q210(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q200(Y), snd(ad(Y,inv(pub(b)))) = na => Q210(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q200(Y), snd(ad(Y,inv(pub(b)))) = nb => Q210(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q200(Y), snd(ad(Y,inv(pub(b)))) = trigger => Q210(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+Q200(Y), snd(ad(Y,inv(pub(b)))) = ok => Q210(ae(pair(fst(ad(Y,inv(pub(b)))),nb),pub(snd(ad(Y,inv(pub(b)))))))
+
+# acknowledgement
+# checks for presence of the nonce nb
+
+Q010(Y), ad(Y,inv(pub(b))) = nb => Q020(ok)
+Q011(Y), ad(Y,inv(pub(b))) = nb => Q021(ok)
+Q110(Y), ad(Y,inv(pub(b))) = nb => Q120(ok)
+Q111(Y), ad(Y,inv(pub(b))) = nb => Q121(ok)
+Q210(Y), ad(Y,inv(pub(b))) = nb => Q220(ok)
+Q211(Y), ad(Y,inv(pub(b))) = nb => Q221(ok)
+
+
+#8
+# Negation of the conjecture: (list of clauses)
+Q211(nb) =>
+
+#9
+# Maximal number of clauses:
+50000
+
+#10
+# Use of uncomplete AC-unification:
+false
+
+#11
+# Maximal number of AC-MGUs: (0 -> no limit)
+0
+
+#12
+# Use of simplification rules:
+true
+
+#121
+# Use of Otter-like strategy for simplification:
+false
+
+#122
+# Maximal depth for simplification: (0 -> no limit)
+0
+
+#14
+# Subsumption algorithm:
+#   forward subsumption:  0: None  1: AC-matching  2: Gottlob&Leitsch
+# + backward subsumption:          4: AC-matching  5: Gottlob&Leitsch
+ 
+
+#15
+# Use of other reduction rules:
+true
+
+#16
+# Maximal size of a clause: (0 -> no limit)
+0
+
+#23
+# Maximal number of variables in a clause: (0 -> no limit)
+0
+
+#17
+# Trace degree: (0: Nothing, 1: Inferences, 2: Detailed, 3: All)
+1
+
+#18
+# Research strategy:  1: Non-Complete   2: Complete
+#                     3: Breadth-First  4: Otter-like
+4
+
+#19
+# Preference for:  1: Conjecture         2: Theory
+#                  3: Negative clauses   4: 1+3    5: 2+3
+#                  6: Positive clauses   7: 1+6    8: 2+6
+#                  0: No preference
+0
+
+#20
+# Try to simplify before the test of subsumption:
+true
+
+#21
+# Strategy of deduction: (false: Paramodulation, true: Superposition)
+true
+
+#211
+# Maximal depth for paramodulation: (0 -> no limit)
+0
+
+#22
+# Use of particular treatment for non-equational literals:
+false
+

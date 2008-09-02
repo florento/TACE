@@ -1,0 +1,10 @@
+# Tree automata aa3
+
+Q1(x1), Q(x2) => Q(f(x1,x2)).
+ => Q(b).
+Q(x1), Q1(x2) => Q(g(x1,x2)).
+
+# query
+# = emptyness decision
+Q(x) => .
+

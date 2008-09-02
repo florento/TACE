@@ -1,0 +1,49 @@
+
+
+SPASS: subsumption of D by C
+
+def.:
+ does C subsumes D?
+i.e. exists theta s.t. C theta subset D.
+
+Rem.
+NP-complete problem [Garay-Johnson 79]
+
+
+Stillman algo [1973]:
+
+ for each literal Ai of C,
+    find Bj literal of D such that Ai sigma_i = Bj
+    s.t. the Bj's are pairwise distinct
+          and the sigma_i are compatible.
+
+
+2 prefilters for tractability 
+ 
+filter1:
+size(C) leq size(D)
+
+rem. the size is likely to be used for selection 
+of clauses, hence can be stored in clauses
+to avoid recomputation.
+-> test almost for free.
+
+
+filter2:
+for every literal A in C, exists a literal A' of D s.t. A' = Asigma?
+(test for existence of sigma's separately, without checking compatibility).
+ rem.: test is PTIME
+
+Rem.: [SPASS-HB]  
+more than 95% of tests are rejected by the 2 filters (in that order).
+
+
+
+
+
+
+
+
+
+
+

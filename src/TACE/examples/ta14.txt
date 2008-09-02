@@ -1,0 +1,10 @@
+
+# e-splitting
+
+Q0(x1), Q0(x2) => Q0(f(x1, x2)).
+Q0(x) => Q.
+# => Q0(a).
+
+# query 
+
+Q => .
