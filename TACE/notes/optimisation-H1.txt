@@ -1,0 +1,25 @@
+
+Optimisation de H1 par JGL inspirée par non-ground splitting:
+
+
+Pour tout literal Q(t)
+où t est gros, i.e. t n'est pas x et pas f(x1,...,xn)),
+soit P un fresh predicate et y1,...,yk = vars(t),
+- ajoute une clause Q(t) => P(y1,...,yk)
+- et remplace toute Q(t), B => H
+  par  P(y1,...,yk), B => H
+
+en pratique, (Q(t), P(y1,...,yk)) doit être tabulé.
+
+Avantage: 
+Q(t) est sélectionné dans Q(t) => P(y1,...,yk)
+tant que t est gros.
+Q(t) va être traité par résolution dans cette clause
+(une fois pour toute) avant d'appliquer le résultat 
+à P(y1,...,yk), B => H  (quand le body n'est plus sélectionné).
+
+Ainsi, Q(t) n'est traité qu'une fois dans Q(t) => P(y1,...,yk), 
+au lieu d'être traité séparément dand chaque Q(t), B => H.
+ça revient a faire du partage de gros literaux dans
+les clauses.
+D'apres JGL, le speedup est très important.

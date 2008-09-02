@@ -1,0 +1,30 @@
+
+Architecture des modules (par ordre de dependance)
+
+Utilities
+ trace.ml util.ml location.ml parsing.ml myqueue.ml
+
+Base data types
+ symbol.ml variable.ml renaming.ml 
+
+Terms and terms operations 
+ term.ml 
+ substitution.ml unification.ml matching.ml 
+
+Atoms, equations and equations operations
+ atom.ml equation.ml trs.ml eblocks.ml
+ rewriting.ml narrowing.ml 
+
+Clauses and clauses operations
+ clausetype.ml clause.ml
+ rparamodulation.ml lparamodulation.ml 
+ tautology.ml elim.ml subsumption.ml resolution.ml esplitting.ml 
+
+Clauseset and clauseset operations
+ instruction.ml clauseset.ml
+ interpreter.ml history.ml 
+
+Main loop
+ parsefile.ml saturation.ml
+
+

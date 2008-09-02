@@ -1,0 +1,12 @@
+
+Use of the size of clauses - atoms - terms.
+
+1. size of atoms of query for backward subsumption.
+
+2. size of (2) clauses for subsumption.
+
+3. size of clauses of US (pool) for selection
+of candidate for resolution.
+
+
+

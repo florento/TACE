@@ -1,0 +1,25 @@
+
+
+symbols are stored on 64 bits numbers.
+
+Starting from last bits:
+- 2 bits not used
+- 2 bits: kind of symbol
+   0x00 = FUNCTION
+   0x01 = PREDICATE
+   0x11 = SPLITTING
+- 4 bits : flags 
+- 8 bits: arity
+- rest: identifier
+
+identifier = index in an association list with names.
+(id, string)
+
+Precedence:
+ FUNCTION < SPLITTING < PREDICATE
+and in each category, the symbols
+are (linearly) ordered, increasingly,
+by their order of declaration with new_symbol.
+
+
+

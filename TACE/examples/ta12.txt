@@ -1,0 +1,11 @@
+
+# e-splitting
+
+Q4(x1), Q3(x1), Q1(x1), Q2(x2) => Q(h(x2)).
+=> Q1(a).
+=> Q3(b).
+Q1(x1), Q3(x2) => Q4(f(x1,x2)).
+
+# query 
+
+Q(x) => .

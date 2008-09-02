@@ -1,0 +1,6 @@
+
+# e-splitting
+
+Q1(x1), Q2(x2), Q3(x3) => Q3(f(x1, x2))
+=> Q3(a)
+

@@ -1,0 +1,55 @@
+
+Equivalence statique
+
+1. Passif
+
+étant donné 
+- une théorie équationnelle E
+- 2 "frames" (substitutions closes) f1, f2 sur signature F
+  avec dom(f1) = dom(f2) = V
+
+On cherche u, v dans T(F, V) tels que
+u f1 =E v f1  et  u f2 neqE v f2
+
+
+On définit une relation R(e(u f1, v f1), e(u f2, v f2)) où e est un nouveau symbole (pas dans F)
+et u, v dans T(F, V) par la théorie de Horn:
+
+=> l = r pour toute éq de E,
+
+=> S(x f1, x f2)  pour tout x dans dom(f1)
+S(x1, x'1),..., S(xn, x'n) => S(f(x1,...,xn), f(x'1,...,x'n))
+
+S(x1, x2), S(y1, y2) => R(e(x1,y1), e(x2, y2))
+
+et query (pour saturation par paramodulation):
+x1 = y1, x2 neq y2, R(e(x1, y1), e(x2, y2)) =>
+
+où 
+- ou bien x2 neq y2 est un litéral équationnel positif
+- ou bien x2 neq y2 est axiomatisé par des clauses de Horn.
+
+2. Actif
+donné
+- 2 process P et P'
+ou leur fait correspondre des états Q et Q' (avec mémoire)
+
+S(., .) est axiomatisé par construction directe de l'automate produit
+(en fait Si(., .) où i est une configuration du système).
+
+message:
+  Si(x, y), e => Si+1(m[x], m[y])
+attaquant (reg):
+  Si1(x1, y1),...,Sin(xn, yn) => Si(d(x1,...,xn), d(y1,...,yn))
+où d est un symbole de destructeur public.
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,70 @@
+
+Structures for storage of set of clauses and terms with maximum sharing.
+
+1. deterministic tree automata for the terms.
+in a heap a la WAM (data structure for prolog).
+= array, where a term is strored as follows:
+_________________________
+... | f | a1| ... | an| ...
+      a
+
+where f is the top function symbol identifier,
+stored at the heap address a,
+n is the arity of f
+and a1,...,an are the respective heap adresses of the subterms,
+or a constant '*' for variable subterms.
+
+It corresponds to a bottom-up TA transition f(a1,...,an) -> a
+
+We only store linear terms in the heap.
+Non linear variables are listed in 
+atoms and clause constraints.
+
+
+2. list of atoms
+for each atom:
+ - symbol of predicate (kind PREDICATE or SPLITTING)
+ - size of the atom
+ - list of arguments.
+
+for each argument:
+ - index of term in term heap
+ - list of equality between variables of the term 
+    variables are represented by their order in 
+    a leftmost depth first traversal of the term.
+
+
+3. list of clauses
+for each clause:
+- head: index atom of 2. or cst GOAL
+- list of negative literals: list of indices of atoms of 2.
+- list of equalities between variables in atomes,
+each equality has the form (i, j) = (i', j')
+where i is the index of a negative literal in the above list
+or -1 for the head
+and j is an index of variable of this atom
+in a leftmost depth first traversal of the term.
+
+
+4. [opt] lists for fast access:
+
+4.1 list of indices in the heap for each function symbol
+
+4.2 assoc list
+(index term, index atom)
+for possible resolution and subsumption, 
+it is sufficient to llok up this list
+(not the complete list of terms).
+
+4.3 assoc. list
+(index atom , index clause containing atom as neg. literal)
+
+4.4 assoc. list
+(index atom , index clause containing atom as head)
+
+Rem: 4.2, 4.3, 4.4 useless,
+enumeration of terms arg. of atoms easy from 2,
+enumeration of pos. and neg. literals easy from 3.
+
+
+

@@ -1,0 +1,17 @@
+
+# Equational theory (collapsing)
+ => f(g(x),g(x)) = x
+
+# TA transitions
+ => Q0(a)
+ => Q0(b)
+
+# Visible symbols
+Q0(x) => Q1(g(x))
+Q1(x) => Q0(g(x))
+Q1(x1), Q0(x2) => Q2(f(x1,x2))
+Q0(x1), Q0(x2) => Q1(f(x1,x2))
+
+# Negation of the conjecture: (list of clauses)
+Q2(a) =>
+

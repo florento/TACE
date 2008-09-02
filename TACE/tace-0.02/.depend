@@ -1,0 +1,177 @@
+parsing.cmi: location.cmi 
+symbol.cmi: trace.cmi 
+renaming.cmi: variable.cmi 
+term.cmi: variable.cmi symbol.cmi renaming.cmi 
+substitution.cmi: variable.cmi term.cmi 
+unification.cmi: term.cmi substitution.cmi atom.cmi 
+matching.cmi: term.cmi substitution.cmi 
+equation.cmi: variable.cmi term.cmi substitution.cmi renaming.cmi 
+trs.cmi: variable.cmi equation.cmi 
+rewriting.cmi: trs.cmi term.cmi substitution.cmi equation.cmi 
+narrowing.cmi: trs.cmi term.cmi substitution.cmi equation.cmi 
+atom.cmi: variable.cmi trs.cmi term.cmi symbol.cmi substitution.cmi \
+    renaming.cmi 
+eblocks.cmi: variable.cmi symbol.cmi renaming.cmi atom.cmi 
+clause.cmi: variable.cmi symbol.cmi substitution.cmi equation.cmi eblocks.cmi \
+    clausetype.cmi atom.cmi 
+rparamodulation.cmi: trs.cmi clause.cmi chrono.cmi 
+lparamodulation.cmi: trs.cmi clause.cmi chrono.cmi 
+solving.cmi: trs.cmi clause.cmi chrono.cmi 
+tautology.cmi: clause.cmi chrono.cmi 
+elim.cmi: clause.cmi 
+subsumption.cmi: clause.cmi chrono.cmi 
+resolution.cmi: clause.cmi chrono.cmi 
+esplitting.cmi: symbol.cmi clause.cmi 
+instruction.cmi: symbol.cmi clause.cmi 
+clauseset.cmi: variable.cmi trs.cmi term.cmi symbol.cmi instruction.cmi \
+    clausetype.cmi clause.cmi atom.cmi 
+interpreter.cmi: instruction.cmi clauseset.cmi clause.cmi chrono.cmi 
+history.cmi: symbol.cmi clauseset.cmi clause.cmi 
+saturation.cmi: history.cmi clauseset.cmi clause.cmi chrono.cmi 
+input.cmi: trs.cmi clause.cmi 
+trace.cmo: trace.cmi 
+trace.cmx: trace.cmi 
+util.cmo: trace.cmi util.cmi 
+util.cmx: trace.cmx util.cmi 
+chrono.cmo: trace.cmi chrono.cmi 
+chrono.cmx: trace.cmx chrono.cmi 
+location.cmo: location.cmi 
+location.cmx: location.cmi 
+parsing.cmo: util.cmi trace.cmi location.cmi parsing.cmi 
+parsing.cmx: util.cmx trace.cmx location.cmx parsing.cmi 
+myqueue.cmo: util.cmi trace.cmi myqueue.cmi 
+myqueue.cmx: util.cmx trace.cmx myqueue.cmi 
+symbol.cmo: util.cmi trace.cmi parsing.cmi symbol.cmi 
+symbol.cmx: util.cmx trace.cmx parsing.cmx symbol.cmi 
+variable.cmo: util.cmi trace.cmi parsing.cmi variable.cmi 
+variable.cmx: util.cmx trace.cmx parsing.cmx variable.cmi 
+renaming.cmo: variable.cmi term.cmi renaming.cmi 
+renaming.cmx: variable.cmx term.cmx renaming.cmi 
+term.cmo: variable.cmi util.cmi trace.cmi symbol.cmi renaming.cmi parsing.cmi \
+    term.cmi 
+term.cmx: variable.cmx util.cmx trace.cmx symbol.cmx renaming.cmx parsing.cmx \
+    term.cmi 
+substitution.cmo: variable.cmi util.cmi trace.cmi term.cmi symbol.cmi \
+    equation.cmi clause.cmi atom.cmi substitution.cmi 
+substitution.cmx: variable.cmx util.cmx trace.cmx term.cmx symbol.cmx \
+    equation.cmx clause.cmx atom.cmx substitution.cmi 
+unification.cmo: variable.cmi trace.cmi term.cmi symbol.cmi substitution.cmi \
+    atom.cmi unification.cmi 
+unification.cmx: variable.cmx trace.cmx term.cmx symbol.cmx substitution.cmx \
+    atom.cmx unification.cmi 
+matching.cmo: variable.cmi util.cmi trace.cmi term.cmi symbol.cmi \
+    substitution.cmi matching.cmi 
+matching.cmx: variable.cmx util.cmx trace.cmx term.cmx symbol.cmx \
+    substitution.cmx matching.cmi 
+equation.cmo: trace.cmi term.cmi substitution.cmi rewriting.cmi renaming.cmi \
+    parsing.cmi matching.cmi equation.cmi 
+equation.cmx: trace.cmx term.cmx substitution.cmx rewriting.cmx renaming.cmx \
+    parsing.cmx matching.cmx equation.cmi 
+trs.cmo: variable.cmi util.cmi term.cmi equation.cmi trs.cmi 
+trs.cmx: variable.cmx util.cmx term.cmx equation.cmx trs.cmi 
+rewriting.cmo: trace.cmi term.cmi substitution.cmi matching.cmi equation.cmi \
+    rewriting.cmi 
+rewriting.cmx: trace.cmx term.cmx substitution.cmx matching.cmx equation.cmx \
+    rewriting.cmi 
+narrowing.cmo: variable.cmi util.cmi unification.cmi trs.cmi trace.cmi \
+    term.cmi symbol.cmi substitution.cmi rewriting.cmi matching.cmi \
+    equation.cmi narrowing.cmi 
+narrowing.cmx: variable.cmx util.cmx unification.cmx trs.cmx trace.cmx \
+    term.cmx symbol.cmx substitution.cmx rewriting.cmx matching.cmx \
+    equation.cmx narrowing.cmi 
+atom.cmo: util.cmi unification.cmi trace.cmi term.cmi symbol.cmi \
+    substitution.cmi rewriting.cmi parsing.cmi matching.cmi atom.cmi 
+atom.cmx: util.cmx unification.cmx trace.cmx term.cmx symbol.cmx \
+    substitution.cmx rewriting.cmx parsing.cmx matching.cmx atom.cmi 
+eblocks.cmo: variable.cmi util.cmi trace.cmi term.cmi symbol.cmi renaming.cmi \
+    atom.cmi eblocks.cmi 
+eblocks.cmx: variable.cmx util.cmx trace.cmx term.cmx symbol.cmx renaming.cmx \
+    atom.cmx eblocks.cmi 
+clausetype.cmo: trace.cmi clausetype.cmi 
+clausetype.cmx: trace.cmx clausetype.cmi 
+clause.cmo: variable.cmi util.cmi trace.cmi term.cmi symbol.cmi \
+    substitution.cmi renaming.cmi parsing.cmi equation.cmi eblocks.cmi \
+    clausetype.cmi atom.cmi clause.cmi 
+clause.cmx: variable.cmx util.cmx trace.cmx term.cmx symbol.cmx \
+    substitution.cmx renaming.cmx parsing.cmx equation.cmx eblocks.cmx \
+    clausetype.cmx atom.cmx clause.cmi 
+rparamodulation.cmo: trs.cmi trace.cmi term.cmi symbol.cmi substitution.cmi \
+    matching.cmi equation.cmi clausetype.cmi clause.cmi chrono.cmi atom.cmi \
+    rparamodulation.cmi 
+rparamodulation.cmx: trs.cmx trace.cmx term.cmx symbol.cmx substitution.cmx \
+    matching.cmx equation.cmx clausetype.cmx clause.cmx chrono.cmx atom.cmx \
+    rparamodulation.cmi 
+lparamodulation.cmo: trs.cmi trace.cmi term.cmi symbol.cmi rewriting.cmi \
+    narrowing.cmi equation.cmi clausetype.cmi clause.cmi chrono.cmi \
+    lparamodulation.cmi 
+lparamodulation.cmx: trs.cmx trace.cmx term.cmx symbol.cmx rewriting.cmx \
+    narrowing.cmx equation.cmx clausetype.cmx clause.cmx chrono.cmx \
+    lparamodulation.cmi 
+solving.cmo: unification.cmi trs.cmi trace.cmi term.cmi symbol.cmi \
+    lparamodulation.cmi equation.cmi clausetype.cmi clause.cmi chrono.cmi \
+    solving.cmi 
+solving.cmx: unification.cmx trs.cmx trace.cmx term.cmx symbol.cmx \
+    lparamodulation.cmx equation.cmx clausetype.cmx clause.cmx chrono.cmx \
+    solving.cmi 
+tautology.cmo: util.cmi trace.cmi equation.cmi clausetype.cmi clause.cmi \
+    chrono.cmi atom.cmi tautology.cmi 
+tautology.cmx: util.cmx trace.cmx equation.cmx clausetype.cmx clause.cmx \
+    chrono.cmx atom.cmx tautology.cmi 
+elim.cmo: util.cmi trace.cmi equation.cmi clausetype.cmi clause.cmi elim.cmi 
+elim.cmx: util.cmx trace.cmx equation.cmx clausetype.cmx clause.cmx elim.cmi 
+subsumption.cmo: util.cmi trace.cmi symbol.cmi substitution.cmi matching.cmi \
+    equation.cmi clausetype.cmi clauseset.cmi clause.cmi chrono.cmi atom.cmi \
+    subsumption.cmi 
+subsumption.cmx: util.cmx trace.cmx symbol.cmx substitution.cmx matching.cmx \
+    equation.cmx clausetype.cmx clauseset.cmx clause.cmx chrono.cmx atom.cmx \
+    subsumption.cmi 
+resolution.cmo: variable.cmi util.cmi unification.cmi trace.cmi term.cmi \
+    symbol.cmi substitution.cmi clausetype.cmi clause.cmi chrono.cmi atom.cmi \
+    resolution.cmi 
+resolution.cmx: variable.cmx util.cmx unification.cmx trace.cmx term.cmx \
+    symbol.cmx substitution.cmx clausetype.cmx clause.cmx chrono.cmx atom.cmx \
+    resolution.cmi 
+esplitting.cmo: variable.cmi util.cmi trace.cmi term.cmi symbol.cmi \
+    eblocks.cmi clausetype.cmi clause.cmi atom.cmi esplitting.cmi 
+esplitting.cmx: variable.cmx util.cmx trace.cmx term.cmx symbol.cmx \
+    eblocks.cmx clausetype.cmx clause.cmx atom.cmx esplitting.cmi 
+instruction.cmo: util.cmi symbol.cmi subsumption.cmi clause.cmi \
+    instruction.cmi 
+instruction.cmx: util.cmx symbol.cmx subsumption.cmx clause.cmx \
+    instruction.cmi 
+clauseset.cmo: variable.cmi util.cmi trs.cmi trace.cmi term.cmi symbol.cmi \
+    subsumption.cmi instruction.cmi clausetype.cmi clause.cmi atom.cmi \
+    clauseset.cmi 
+clauseset.cmx: variable.cmx util.cmx trs.cmx trace.cmx term.cmx symbol.cmx \
+    subsumption.cmx instruction.cmx clausetype.cmx clause.cmx atom.cmx \
+    clauseset.cmi 
+interpreter.cmo: util.cmi trace.cmi tautology.cmi symbol.cmi subsumption.cmi \
+    solving.cmi rparamodulation.cmi resolution.cmi narrowing.cmi \
+    lparamodulation.cmi instruction.cmi esplitting.cmi elim.cmi \
+    clausetype.cmi clauseset.cmi clause.cmi chrono.cmi atom.cmi \
+    interpreter.cmi 
+interpreter.cmx: util.cmx trace.cmx tautology.cmx symbol.cmx subsumption.cmx \
+    solving.cmx rparamodulation.cmx resolution.cmx narrowing.cmx \
+    lparamodulation.cmx instruction.cmx esplitting.cmx elim.cmx \
+    clausetype.cmx clauseset.cmx clause.cmx chrono.cmx atom.cmx \
+    interpreter.cmi 
+history.cmo: trace.cmi symbol.cmi interpreter.cmi instruction.cmi \
+    clauseset.cmi clause.cmi history.cmi 
+history.cmx: trace.cmx symbol.cmx interpreter.cmx instruction.cmx \
+    clauseset.cmx clause.cmx history.cmi 
+saturation.cmo: util.cmi trs.cmi trace.cmi subsumption.cmi myqueue.cmi \
+    interpreter.cmi instruction.cmi history.cmi clausetype.cmi clauseset.cmi \
+    clause.cmi chrono.cmi saturation.cmi 
+saturation.cmx: util.cmx trs.cmx trace.cmx subsumption.cmx myqueue.cmx \
+    interpreter.cmx instruction.cmx history.cmx clausetype.cmx clauseset.cmx \
+    clause.cmx chrono.cmx saturation.cmi 
+input.cmo: util.cmi trs.cmi trace.cmi symbol.cmi parsing.cmi location.cmi \
+    eblocks.cmi clausetype.cmi clause.cmi atom.cmi input.cmi 
+input.cmx: util.cmx trs.cmx trace.cmx symbol.cmx parsing.cmx location.cmx \
+    eblocks.cmx clausetype.cmx clause.cmx atom.cmx input.cmi 
+output.cmo: trace.cmi subsumption.cmi solving.cmi saturation.cmi \
+    rparamodulation.cmi resolution.cmi lparamodulation.cmi interpreter.cmi \
+    chrono.cmi output.cmi 
+output.cmx: trace.cmx subsumption.cmx solving.cmx saturation.cmx \
+    rparamodulation.cmx resolution.cmx lparamodulation.cmx interpreter.cmx \
+    chrono.cmx output.cmi 

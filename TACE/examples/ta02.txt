@@ -1,0 +1,11 @@
+# Tree automata aa2
+
+=> Q(a).
+
+# final transition
+Q(x1) => Qf(g(x1,x1)).
+
+# query
+  # = emptyness decision
+Qf(x) => .
+

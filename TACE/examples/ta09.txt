@@ -1,0 +1,11 @@
+
+# TA transitions
+=> Q0(a)
+=> Q0(b)
+
+# Visible symbols
+Q1(x) => Q0(g(x))
+Q1(x) => Q1(h(x))
+
+# Negation of the conjecture: (list of clauses)
+
